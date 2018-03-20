@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+
+<div class="container">
+	<div class="row">
+            <div class="box">
+             <div class="col-lg-12">
+                    <hr>
+					<h2 class="text-center">
+						{% thumbnail project.project_img "200x200" crop="center" as im %}
+                    	<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    	{% empty %}
+    					<img src="{% static 'audiogenie/img/project.jpg' %}" width="200" height="200">
+						{% endthumbnail %}
+						<br>
+						<br>
+						{{ project.project_name }}
+                        <br>
+                        <small>{{project.pub_date}}</small>
+						
+                    </h2>
+                    <hr>
+                </div>   
+                
+      <div class="text-center">
+      <h5 class="col-md-12"> Project Contributors:
+      {% for user in project.users.all %}
+      {{ user.username }}, 
+      {% endfor %}
+      </h5>
+	  <br>
+	  
+      <form method="post" action="/audiogenie/{{ project.id }}/add_friend/">
+      {% csrf_token %}
+      		Add Contributers: <input type="text" name="user" value="" size="50" placeholder="Enter Friend's Username Here" required/>
+                  <input type="submit" value="submit" />
+      </form>
+      <br> </br>
+	  </div>
+	  </div>
+	  </div>
+	  </div>
+	  
+	  
+	<div class="container">
+	<div class="row">
+            <div class="box">
+             <div class="col-lg-12">
+			 
+	  <br> </br>
+      <p> <a href="/audiogenie/{{ project.id }}/track_create/" class="btn-lg btn-success">Add Track</a> </p>
+      
+      <br> </br>
+	  <form>  
+           		<input type="button" class="btn btn-success" value="Play All" onClick="
+           		{% for track in project.track_set.all %}
+           		PlaySound('{{track.id}}')
+           		{% endfor %}
+           		">  
+           		
+           		<input type="button" class="btn btn-warning" value="Pause All" onClick="
+           		{% for track in project.track_set.all %}
+           		PauseSound('{{track.id}}')
+           		{% endfor %}
+           		">  
+           		
+           		<input type="button" class="btn btn-danger" value="Stop All" onClick="
+           		{% for track in project.track_set.all %}
+           		StopSound('{{track.id}}')
+           		{% endfor %}
+           		">  
+           		
+      </form>
+	  
+	  <div class="row">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Mute/Unmute Key</th>
+                <th>Loop</th>
+                <th>Track Name</th>
+                <th>Instrument</th>
+                <th>Tempo</th>
+                <th>Audio</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+            {% for track in project.track_set.all %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td> <input type="checkbox" id="loop{{track.id}}" onClick="LoopSound('{{track.id}}')"/>​ </td>
+                <td>{{ track.track_name }}</td>
+                <td> {{ track.instrument }} </td>
+                <td>{{ track.tempo }}</td>
+                
+                <td>    <audio id="{{track.id}}" src="{{track.track_file.url}}" controls preload="auto" autobuffer></audio></td>
+				
+				
+				<td> <a href="{{track.track_file.url}}" class="btn btn-primary" download="{{track.track_file.url}}"> Download </a>
+				<td> <a href='/audiogenie/{{ track.id }}/delete_tra/' class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this track?')" >Delete Track</a> </td>
+              
+              
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+   
+   
+</div>
+</div>
+</div>
+
+</div>
+   
+ 
+<!-- This is where the play, pause and stop buttons do their magic -->
+           <script> 
+           		
+           		
+           		function PlaySound(soundobj) 
+           		{  
+           			var thissound=document.getElementById(soundobj);  
+           			thissound.play(); 
+           		}   
+           		
+           		function PauseSound(soundobj) 
+           		{  
+           			var thissound=document.getElementById(soundobj);  
+           			thissound.pause();  
+           		}  
+           		
+           		function StopSound(soundobj) 
+           		{  
+           			var thissound=document.getElementById(soundobj);  
+           			thissound.pause();
+           			thissound.currentTime = 0;  
+           		} 
+           		
+           		function LoopSound(soundobj) 
+           		{
+           			
+           			var thissound=document.getElementById(soundobj);
+        			{% for track in project.track_set.all %}
+        			if (document.getElementById('loop{{track.id}}').checked) {  
+            			thissound.loop = true;
+        			} else {
+            			thissound.loop = false;
+        			}
+        			{% endfor %}
+    			
+    			} 
+				
+           	</script>
+   
+   <div class="row">
+            <div class="box">
+			<div class="col-lg-12">
+                <div class="col-lg-4">
+  			<form method="post" action="/audiogenie/{{ project.id }}/del_friend/">
+      {% csrf_token %}
+  		<label for="sel1">Remove a contributer:</label>
+  		<select class="form-control" id="sel1" name="user">
+    	    {% for user in project.users.all %}
+    	    {% if user.username != project.main_user %}
+    			<option>{{ user.username }}</option>
+			
+			{% endif %}
+			
+			{% endfor %}
+  		</select>
+  		<input type="submit" value="Remove" onclick="return confirm('Are you sure you want to remove that user?')" />
+      </form>  
+		<br>	  
+  		</div>
+		</div>
+
+		
+		<br>
+		
+		<div class="col-sm-12">
+  			 <a href="/audiogenie/{{ project.id }}/delete_pro/" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the project?')">Delete Project</a>
+  		</div>
+		
+	</div>
+	</div>
+	</div>
+   
+   
+   
+   
+   
+   <!-- This is where the log starts -->
+   
+   <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Edit
+                        <strong>Log</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <form role="form" method="post" action="/audiogenie/{{ project.id }}/add_note/">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-12">
+                                <label>Message Board</label>
+                                <textarea name="add_note" class="form-control" rows="6"></textarea>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <input type="hidden" name="save" value="contact">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-lg-12"style="height:200px;line-height:3em;overflow:auto;padding:5px;">
+					<hr>
+                {% if log_set %}
+                {% for log in log_set %}
+                    <p> <strong> {{log.edit_time}} </strong> -- {{log.note}}  </p>
+                {% endfor %}
+                {% endif %}
+                
+            		<h5> END </h5>
+        <!--          <a href="#" class="btn btn-default btn-lg text-center">Read More</a> -->
+                	</div>
+                	<hr>
+                    <p class= "text-center"> Scroll to see more... </p>
+                    <hr>
+            </div>
+        </div>
+
+
+        </div>
+  
+  
+{% endblock %}

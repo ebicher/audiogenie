@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                	<h2 class="brand-before">
+                        <small>Welcome to</small>
+                    </h2>
+                    <h1 class="brand-name">Audio Genie</h1>
+                    <hr class="tagline-divider">
+                    <h2>
+                        <small>By
+                            <strong>Evan, Jonah, Matt, Mindy</strong>
+                        </small>
+                    </h2>
+                	<div id="carousel-example-generic" class="carousel slide">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators hidden-xs">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+
+
+
+                        <!-- Wrapper for slides-->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="img-responsive img-full" src="{% static 'audiogenie/img/slide-1.jpg' %}" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive img-full" src="{% static 'audiogenie/img/slide-2.jpg' %}" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive img-full" src="{% static 'audiogenie/img/slide-3.jpg' %}" alt="">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="icon-prev"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="icon-next"></span>
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Collaborate with your band from <strong>anywhere</strong>
+                    </h2>
+                    
+                    <hr>
+                    <hr class="visible-xs">
+                    <p> Getting started with Auidio Genie is as simple as can be. With this site you will be able to share tacks with your friends, post notes about your ideas, and test different variations of sounds for your musical project all at one place.
+                    </p>
+                    <p> If you've ever wanted to write music with a friend but were too far away then this is a alternative way to keep your creative chemistry alive.
+                    </p> 
+                    <p> This site also works as a live DJ interface, with a new hot keys feature that allows you to play and pause tracks without using a your mouse.
+                    </p>
+                    </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Getting Started with
+                        <strong>a new world</strong> at your fingertips
+                    </h2>
+                    <hr>
+                     <img class="img-responsive img-full" src="{% static 'audiogenie/img/UserHomePage.jpg' %}" alt=""><hr class="visible-xs">
+                    
+                    <p> To get started, just register a new account. Make sure to save your username and password. Our site is not set up to resend you this info yet.</p>
+                    <p> After you've made an account, log in with your username and password. This page you are at after logging in is where you will have access to all the projects that you create with Audiogenie. As you begin to collaborate and share more and more, so too will this page grow into a gallary of your music. If someone adds you as a contributor to a project, then that project will also be accessable here. </p>
+                    <p> If the page doesn't look quite right, <strong>try resizing your window</strong> by dragging the right or left side inward.</p>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Creating a project
+                    </h2>
+                    <hr>
+                    <img class="img-responsive img-full" src="{% static 'audiogenie/img/createProject.jpg' %}" alt="">
+                    <p> From here just upload tracks that you want to share with your friends! A log at the bottom of the project page keeps track of changes you or your friend make, and controls like Play, Pause, and Stop All let you test differnt song ideas.</p>
+                    <p> PRO TIP! You can use hot keys to mute selected tracks. This could be useful when playing multpile tracks at once. </p>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
