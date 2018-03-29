@@ -1,6 +1,6 @@
 # AudioGenie
 
-This was a project created at Humboldt State University by Evan, Jonah, Matt and Mindy. It is a music collaboration site created for musicans who are far away from each other but want to make music together. The idea is person A creates a song, he chooses the tempo and a picture or piece of art to be the face of the song. Then he can upload instrument tracks that match that tempo. Another 
+This was a project created at Humboldt State University by Evan, Jonah, Matt and Mindy. It is a music collaboration site created for musicans who are far away from each other but want to make music together. The idea is person A creates a song, he chooses the tempo and a picture or piece of art to be the face of the song. Then he can upload instrument tracks that match that tempo. User A can add a friend (or friends) by knowing their username and inputing in the project (song) page. Anyone added to a project has the power to contribute to the song or add users. On the project page, there is an event log where it states changes that have been made and comments people have about the song. When multiple tracks are added to the project, it allows the users to play, pause and stop all the tracks simutaneously.
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ Sorl-thumbnails
 Tests are incoming!
 
 ```
-I really need to put these in...
+Test test test
 ```
 
 ## Deployment
