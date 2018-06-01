@@ -55,7 +55,7 @@ One version
 ## Authors
 
 * **Evan Bicher** - 
-* **Jonah Peele ** - 
+* **Jonah Peele** - 
 * **Matt Hall** -
 * **Mindy Chun** -
 
